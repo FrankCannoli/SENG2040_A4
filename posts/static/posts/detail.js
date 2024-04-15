@@ -1,4 +1,5 @@
 console.log('hello world detail')
+
 const postBox = document.getElementById('post-box')
 const alertBox = document.getElementById('alert-box')
 const backBtn = document.getElementById('back-btn')
@@ -88,4 +89,24 @@ updateForm.addEventListener('submit', e=>{
 
 
     })
+})
+
+deleteForm.addEventListener('submit', e=>{
+    e.preventDefault()
+
+    $.ajax({
+        type: 'POST',
+        url: deleteUrl,
+        data: {
+            'csrfmiddlewaretoken': csrf[0].value,
+        },
+        success: function(resposne){
+            window.location.href = window.location.origin
+            localStorage.setItem('title', titleInput.value)
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+
 })
